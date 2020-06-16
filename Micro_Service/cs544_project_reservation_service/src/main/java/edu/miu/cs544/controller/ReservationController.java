@@ -17,6 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import edu.miu.cs544.service.ReservationService;
 import edu.miu.cs544.service.response.ReservationResponse;
+import edu.miu.cs544.service.response.TicketResponse;
+import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
 
 @RestController
 @RequestMapping("reservations")
@@ -53,7 +55,7 @@ public class ReservationController {
 	public ReservationResponse cancelReservation(@RequestParam String code) {
 		return reservationService.cancelReservation(code);
 	}
-	
+  
 	@GetMapping("/{code}/flights")
 	public List<Integer> getAllFlightByReservationCode(@PathVariable String code) {
 	   return reservationService.getAllFlightsByReservationCode(code);
@@ -67,5 +69,10 @@ public class ReservationController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passenger id does not exist", ex);
 			
 		}
+  }
+    
+	@PostMapping("/{code}/tickets")
+	public TicketsAndEmailScheduleRequest finalizeReservation(@PathVariable String code) {
+		return reservationService.finalizeReservation(code);
 	}
 }

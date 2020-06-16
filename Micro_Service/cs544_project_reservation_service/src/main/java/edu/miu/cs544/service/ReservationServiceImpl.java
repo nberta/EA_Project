@@ -14,7 +14,10 @@ import edu.miu.cs544.domain.Reservation;
 import edu.miu.cs544.domain.ReservationDetail;
 import edu.miu.cs544.repository.PassengerRepository;
 import edu.miu.cs544.repository.ReservationRepository;
+import edu.miu.cs544.service.response.PassengerResponse;
 import edu.miu.cs544.service.response.ReservationResponse;
+import edu.miu.cs544.service.response.TicketResponse;
+import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
 import edu.miu.cs544.util.Constant.ReservationStatus;
 
 @Service
@@ -28,6 +31,8 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Autowired
 	private PassengerRepository passengerRepository;
+  
+	@Autowired TicketService ticketService;
 	
 	@Override
 	public ReservationResponse getByCode(String code) {
@@ -60,8 +65,8 @@ public class ReservationServiceImpl implements ReservationService {
 				.map(reservation -> new ReservationResponse(reservation))
 				.collect(Collectors.toList());
 	}
-
-	@Override
+  
+  @Override
 	public List<ReservationResponse> getAllByUserEmail(String userEmail) {
 		return reservationRepository.findByUserEmail(userEmail)
 				.parallelStream()
@@ -75,6 +80,14 @@ public class ReservationServiceImpl implements ReservationService {
 				.parallelStream()
 				.map(reservation -> new ReservationResponse(reservation))
 				.collect(Collectors.toList());
+	}
+  
+	@Override
+	public TicketsAndEmailScheduleRequest finalizeReservation(String code) {
+		Passenger passenger = getPassengerByReservationCode(code);
+		List<TicketResponse> tickets = ticketService.purchaseTickets(code, passenger.getId());
+		PassengerResponse passengerResponse = new PassengerResponse(passenger);
+		return new TicketsAndEmailScheduleRequest(tickets, passengerResponse);
 	}
 	
 	@Override
@@ -99,4 +112,8 @@ public class ReservationServiceImpl implements ReservationService {
 	    reservationRepository.save(reservation);
 	    return new ReservationResponse(reservation);
 	}	
+  
+	private Passenger getPassengerByReservationCode(String code) {
+		return reservationRepository.findByCode(code).getPassenger();
+  }
 }

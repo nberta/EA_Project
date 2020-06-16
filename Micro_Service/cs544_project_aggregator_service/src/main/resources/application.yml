@@ -6,3 +6,5 @@ spring:
     
 reservation_service: reservation_service
 airport_service: airport_service
+auth_service: auth_service
+quartz_email_service: quartz_email_service
