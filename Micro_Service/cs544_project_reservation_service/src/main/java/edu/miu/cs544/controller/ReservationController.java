@@ -37,6 +37,16 @@ public class ReservationController {
 		return reservationService.getAllByPassengerId(passenger_id);
 	}
 	
+	@GetMapping
+	public List<ReservationResponse> getAllReservationByUserEmail(@RequestParam String user_email) {
+		return reservationService.getAllByUserEmail(user_email);
+	}
+	
+	@GetMapping
+	public List<ReservationResponse> getAllReservationByUserEmailAndPassengerId(@RequestParam String user_email, @RequestParam Integer passenger_id) {
+		return reservationService.getAllByUserEmailAndPassengerId(user_email, passenger_id);
+	}
+	
 	@DeleteMapping(params = {"code"})
 	public ReservationResponse cancelReservation(@RequestParam String code) {
 		return reservationService.cancelReservation(code);

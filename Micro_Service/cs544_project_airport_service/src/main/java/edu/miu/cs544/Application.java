@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +25,7 @@ import edu.miu.cs544.repository.FlightRepository;
 public class Application implements CommandLineRunner {
 	
 	@Autowired
-    private FlightRepository flightRepository;
+    private FlightRepository flightRepository;	
 	
 	private DateFormat dateFormat = new SimpleDateFormat("MM dd, yyyy hh:mm");
 	
@@ -33,6 +35,7 @@ public class Application implements CommandLineRunner {
 	}
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		/* Airline objects */
         Airline airline1 = new Airline("UA","United Airlines", "AAAAAAAAAAAAAAAAAA");

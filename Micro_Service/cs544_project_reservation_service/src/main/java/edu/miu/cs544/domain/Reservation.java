@@ -41,10 +41,11 @@ public class Reservation {
 		super();
 	}
 	
-	public Reservation(String code, Passenger passenger, List<ReservationDetail> listReservationDetail) {
+	public Reservation(String code, Passenger passenger, String userEmail, List<ReservationDetail> listReservationDetail) {
 		super();
 		this.code = code;
 		this.passenger = passenger;
+		this.userEmail = userEmail;
 		this.reservationDetails = listReservationDetail;
 		this.reservationStatus = ReservationStatus.PENDING;
 	}
