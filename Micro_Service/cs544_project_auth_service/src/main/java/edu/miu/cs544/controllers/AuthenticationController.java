@@ -45,7 +45,7 @@ public class AuthenticationController {
 	public UserResponse validateToken(@RequestBody String token) {
 		return authenticationService.validateToken(token);
 	}
-
+	
 	@GetMapping(value = "/validate")
 	public UserResponse validateToken(HttpServletRequest request) {
 		String header = request.getHeader("Authorization");

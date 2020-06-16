@@ -3,11 +3,6 @@ server:
 spring:
   application:
     name: quartz_email_service
-  datasource:
-    url: jdbc:mysql://localhost/quartz_demo
-    username: cs544
-    password: 201511
-    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate.ddl-auto: create-drop
