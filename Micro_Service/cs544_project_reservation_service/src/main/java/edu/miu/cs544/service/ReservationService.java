@@ -13,5 +13,7 @@ public interface ReservationService {
 	List<ReservationResponse> getAllByPassengerId(Integer id);
 	List<ReservationResponse> getAllByUserEmailAndPassengerId(String userEmail, Integer passengerId);
 	List<ReservationResponse> getAllByUserEmail(String userEmail);
+	ReservationResponse makeReservation(Integer passengerId, List<Integer> flights);
+	List<Integer> getAllFlightsByReservationCode(String code);
   TicketsAndEmailScheduleRequest finalizeReservation(String code);
 }

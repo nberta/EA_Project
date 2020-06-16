@@ -1,43 +1,43 @@
-package edu.miu.cs544.domain;
+package edu.miu.cs544.service.request;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import edu.miu.cs544.domain.Address;
 
-import edu.miu.cs544.service.request.AddressRequest;
-
-@Entity
-public class Address {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AddressRequest {
 	private Integer id;
 	private String street;
 	private String city;
 	private String state;
 	private String zip;
 		
-	public Address() {
+	public AddressRequest() {
 		super();
 	}
+	public AddressRequest(Address address) {
+		super();
+		if(address != null) {
+			this.id = address.getId();
+			this.street = address.getStreet();
+			this.city = address.getCity();
+			this.state = address.getState();
+			this.zip = address.getZip();
+		}
+	}
 	
-	public Address(String street, String city, String state, String zip) {
+	public AddressRequest(String street, String city, String state, String zip) {
 		super();
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
 	}
-	
-	public Address(AddressRequest addressRequest) {
+
+	public AddressRequest(Integer id, String street, String city, String state, String zip) {
 		super();
-		if(addressRequest != null) {
-			this.id = addressRequest.getId();
-			this.street = addressRequest.getStreet();
-			this.city = addressRequest.getCity();
-			this.state = addressRequest.getState();
-			this.zip = addressRequest.getZip();
-		}
+		this.id = id;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
 	}
 
 	public Integer getId() {
