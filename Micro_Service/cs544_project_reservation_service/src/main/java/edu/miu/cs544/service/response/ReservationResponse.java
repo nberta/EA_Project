@@ -7,7 +7,7 @@ public class ReservationResponse {
 	private Integer id;
 	private String code;
 	private ReservationStatus reservationStatus;
-	private PassengerResponse passenger;
+	private Integer passengerId;
 	private String userEmail;
 	
 	public ReservationResponse() {
@@ -19,18 +19,18 @@ public class ReservationResponse {
 			this.id = reservation.getId();
 			this.code = reservation.getCode();
 			this.reservationStatus = reservation.getReservationStatus();
-			this.passenger = new PassengerResponse(reservation.getPassenger());
+			this.passengerId = reservation.getPassenger().getId();
 			this.userEmail = reservation.getUserEmail();
 		}
 	}
 
 	public ReservationResponse(Integer id, String code, ReservationStatus reservationStatus,
-			PassengerResponse passenger, String userEmail) {
+			Integer passengerId, String userEmail) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.reservationStatus = reservationStatus;
-		this.passenger = passenger;
+		this.passengerId = passengerId;
 		this.userEmail = userEmail;
 	}
 
@@ -58,12 +58,12 @@ public class ReservationResponse {
 		this.reservationStatus = reservationStatus;
 	}
 
-	public PassengerResponse getPassenger() {
-		return passenger;
+	public Integer getPassengerId() {
+		return passengerId;
 	}
 
-	public void setPassenger(PassengerResponse passenger) {
-		this.passenger = passenger;
+	public void setPassenger(Integer passengerId) {
+		this.passengerId = passengerId;
 	}
 	public String getUserEmail() {
 		return userEmail;

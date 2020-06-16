@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 
+import edu.miu.cs544.service.request.AddressRequest;
+import edu.miu.cs544.service.request.PassengerRequest;
+
 @Entity
 public class Passenger {
 	@Id
@@ -44,6 +47,19 @@ public class Passenger {
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.address = address;
+	}
+	
+	public Passenger(PassengerRequest passengerRequest) {
+		super();
+		if(passengerRequest != null)
+		{
+			this.id = passengerRequest.getId();
+			this.firstName = passengerRequest.getFirstName();
+			this.lastName = passengerRequest.getLastName();
+			this.dateOfBirth = passengerRequest.getDateOfBirth();
+			this.email = passengerRequest.getEmail();
+			this.address = new Address(passengerRequest.getAddress());
+		}
 	}
 
 	public Integer getId() {
