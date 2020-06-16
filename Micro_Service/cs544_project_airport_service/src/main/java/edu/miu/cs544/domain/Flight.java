@@ -43,8 +43,7 @@ public class Flight {
 		super();
 	}
 	
-	public Flight(Integer number, Integer capacity, Airline airline, Airport departureAirport, Airport arrivalAirport,
-			Date departureDate, Date arrivalDate) {
+	public Flight(Integer number, Integer capacity, Airline airline, Airport departureAirport, Airport arrivalAirport, Date departureDate, Date arrivalDate) {
 		super();
 		this.number = number;
 		this.capacity = capacity;
@@ -54,6 +53,7 @@ public class Flight {
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 	}
+	
 
 	public Integer getId() {
 		return id;
