@@ -31,6 +31,8 @@ public class Reservation {
 	@JoinColumn
 	private Passenger passenger;
 	
+	private String userEmail;
+	
 	@OneToMany(mappedBy = "reservation", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	@OrderBy("flight.departureDate ASC")
 	private List<ReservationDetail> reservationDetails = new ArrayList<ReservationDetail>();
@@ -102,6 +104,14 @@ public class Reservation {
 			success = true;
 		}
 		return success;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	
 	

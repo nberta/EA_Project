@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:    
+  application:
+    name: aggregator_service
+    
+reservation_service: reservation_service
+airport_service: airport_service

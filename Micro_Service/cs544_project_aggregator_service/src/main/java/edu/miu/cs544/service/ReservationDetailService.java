@@ -6,5 +6,5 @@ import edu.miu.cs544.service.response.ReservationDetailResponse;
 
 public interface ReservationDetailService {
 	List<ReservationDetailResponse> getAll();
-	List<ReservationDetailResponse> getAllByReservationCode(String code);
+	ReservationDetailResponse[] getAllByReservationCode(String reservation_code);
 }

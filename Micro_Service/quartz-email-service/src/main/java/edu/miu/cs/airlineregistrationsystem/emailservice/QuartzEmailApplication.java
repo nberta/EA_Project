@@ -1,0 +1,22 @@
+package edu.miu.cs.airlineregistrationsystem.emailservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class QuartzEmailApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(QuartzEmailApplication.class, args);
+	}
+
+	@Bean("mailProperties")
+	public MailProperties getMailProperties() {
+		MailProperties mailProperties = new MailProperties();
+		mailProperties.setUsername("testing.email.service.cs544@gmail.com");
+		mailProperties.setPassword("leavenbread4");
+		return mailProperties;
+	}
+}

@@ -43,4 +43,13 @@ public class FlightServiceImpl implements FlightService {
 				.map(f->new FlightResponse(f))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<FlightResponse> getAllByNumbers(List<Integer> numbers) {
+		return flightRepository.findAllByNumbers(numbers)
+				.stream()
+				.parallel()
+				.map(f->new FlightResponse(f))
+				.collect(Collectors.toList());
+	}
 }

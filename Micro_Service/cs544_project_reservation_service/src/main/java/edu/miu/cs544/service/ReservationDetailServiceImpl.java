@@ -24,4 +24,12 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 				.map(detail -> new ReservationDetailResponse(detail))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<ReservationDetailResponse> getAll() {
+		return reservationDetailRepository.findAll()
+				.parallelStream()
+				.map(detail -> new ReservationDetailResponse(detail))
+				.collect(Collectors.toList());
+	}
 }

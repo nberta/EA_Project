@@ -1,10 +1,11 @@
-package edu.miu.cs544.controller;
+package edu.miu.cs544.Controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs544.service.ReservationDetailService;
@@ -21,9 +22,8 @@ public class ReservationDetailController {
 		return reservationDetailService.getAll();
 	}
 	
-	@GetMapping(params = "reservation_code")
-	public List<ReservationDetailResponse> getAllByReservationCode(String reservation_code) {
+	@GetMapping(params = {"reservation_code"})
+	public ReservationDetailResponse[] getAllByPassengerId(@RequestParam String reservation_code) {
 		return reservationDetailService.getAllByReservationCode(reservation_code);
 	}
-	
 }
