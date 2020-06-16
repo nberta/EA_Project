@@ -1,15 +1,18 @@
-package edu.miu.cs544.Controller;
+package edu.miu.cs544.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs544.service.ReservationService;
 import edu.miu.cs544.service.response.ReservationResponse;
+import edu.miu.cs544.service.response.ScheduleEmailResponse;
 
 @RestController
 @RequestMapping("/reservations")
@@ -30,5 +33,10 @@ public class ReservationController {
 	@GetMapping(params = {"passenger_id"})
 	public List<ReservationResponse> getAllByPassengerId(@RequestParam Integer passenger_id) {
 		return reservationService.getAllByPassengerId(passenger_id);
+	}
+	
+	@PostMapping("/{code}/tickets")
+	public ScheduleEmailResponse finalizeReservation(@PathVariable String code) {
+		return reservationService.finalizeReservation(code);
 	}
 }

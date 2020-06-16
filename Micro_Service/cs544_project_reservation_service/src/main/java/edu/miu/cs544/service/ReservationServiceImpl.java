@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.miu.cs544.domain.Passenger;
 import edu.miu.cs544.domain.Reservation;
 import edu.miu.cs544.repository.ReservationRepository;
+import edu.miu.cs544.service.response.PassengerResponse;
 import edu.miu.cs544.service.response.ReservationResponse;
+import edu.miu.cs544.service.response.TicketResponse;
+import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
 import edu.miu.cs544.util.Constant.ReservationStatus;
 
 @Service
@@ -17,6 +21,8 @@ import edu.miu.cs544.util.Constant.ReservationStatus;
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired TicketService ticketService;
 	
 	@Override
 	public ReservationResponse getByCode(String code) {
@@ -48,6 +54,18 @@ public class ReservationServiceImpl implements ReservationService {
 				.parallelStream()
 				.map(reservation -> new ReservationResponse(reservation))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public TicketsAndEmailScheduleRequest finalizeReservation(String code) {
+		Passenger passenger = getPassengerByReservationCode(code);
+		List<TicketResponse> tickets = ticketService.purchaseTickets(code, passenger.getId());
+		PassengerResponse passengerResponse = new PassengerResponse(passenger);
+		return new TicketsAndEmailScheduleRequest(tickets, passengerResponse);
+	}
+	
+	private Passenger getPassengerByReservationCode(String code) {
+		return reservationRepository.findByCode(code).getPassenger();
 	}
 	
 }

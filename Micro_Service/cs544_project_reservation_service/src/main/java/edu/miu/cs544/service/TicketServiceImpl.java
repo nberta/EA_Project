@@ -29,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
 		if (ticketNumber < Math.pow(10, 20)) makeTicketNumber();
 		Ticket ticket = ticketRepository.findByNumber(ticketNumber);
 		if (ticket != null) {
-			makeTicketNumber();
+			return makeTicketNumber();
 		}
 		return ticketNumber;	
 	}
@@ -40,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
 	}
 	
 	@Override
-	public List<TicketResponse> purchaseReservation(String code, Integer passengerId) {
+	public List<TicketResponse> purchaseTickets(String code, Integer passengerId) {
 		Reservation reservation = reservationRepository.findByCode(code);
 		if(reservation == null) {
 			throw new RuntimeException();

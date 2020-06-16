@@ -1,4 +1,4 @@
-package edu.miu.cs544.Controller;
+package edu.miu.cs544.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;

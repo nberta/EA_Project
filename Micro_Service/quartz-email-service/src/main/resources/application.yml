@@ -1,0 +1,39 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: quartz_email_service
+  datasource:
+    url: jdbc:mysql://localhost/quartz_demo
+    username: cs544
+    password: 201511
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: create-drop
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          threadPool:
+            threadCount: 5
+  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: nahomseifu22@gmail.com
+#    password: MICHAEL12St
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#          host: smtp.gmail.com
