@@ -1,6 +1,5 @@
 server:
-  port: 8083
-
+  port: 8080
 spring:
   application:
     name: auth_service
@@ -21,3 +20,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+
+reservation_service: reservation_service
+airport_service: airport_service
+quartz_email_service: quartz_email_service
