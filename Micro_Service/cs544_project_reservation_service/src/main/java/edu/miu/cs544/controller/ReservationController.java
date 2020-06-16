@@ -5,12 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs544.service.ReservationService;
 import edu.miu.cs544.service.response.ReservationResponse;
+import edu.miu.cs544.service.response.TicketResponse;
+import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
 
 @RestController
 @RequestMapping("reservations")
@@ -46,5 +50,10 @@ public class ReservationController {
 	@DeleteMapping(params = {"code"})
 	public ReservationResponse cancelReservation(@RequestParam String code) {
 		return reservationService.cancelReservation(code);
+	}
+	
+	@PostMapping("/{code}/tickets")
+	public TicketsAndEmailScheduleRequest finalizeReservation(@PathVariable String code) {
+		return reservationService.finalizeReservation(code);
 	}
 }

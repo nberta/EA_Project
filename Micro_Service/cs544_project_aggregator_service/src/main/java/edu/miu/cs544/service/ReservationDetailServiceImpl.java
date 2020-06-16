@@ -37,7 +37,6 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 
 	@Override
 	public ReservationDetailResponse[] getAllByReservationCode(String reservation_code) {
-		// TODO Auto-generated method stub
 		return restTemplate.getForObject(lookupUrlFor(reservationServiceName) + "/reservationDetails?reservation_code="+reservation_code, ReservationDetailResponse[].class);
 	}
 
