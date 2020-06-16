@@ -11,4 +11,6 @@ import edu.miu.cs544.domain.Reservation;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 	Reservation findByCode(String code);
 	List<Reservation> findByPassengerId(Integer id);
+	List<Reservation> findByUserEmailAndPassengerId(String userEmail, Integer passengerId);
+	List<Reservation> findByUserEmail(String userEmail);
 }

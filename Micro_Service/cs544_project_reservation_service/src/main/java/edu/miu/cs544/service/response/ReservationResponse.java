@@ -7,8 +7,8 @@ public class ReservationResponse {
 	private Integer id;
 	private String code;
 	private ReservationStatus reservationStatus;
-
 	private PassengerResponse passenger;
+	private String userEmail;
 	
 	public ReservationResponse() {
 		super();
@@ -20,16 +20,18 @@ public class ReservationResponse {
 			this.code = reservation.getCode();
 			this.reservationStatus = reservation.getReservationStatus();
 			this.passenger = new PassengerResponse(reservation.getPassenger());
+			this.userEmail = reservation.getUserEmail();
 		}
 	}
 
 	public ReservationResponse(Integer id, String code, ReservationStatus reservationStatus,
-			PassengerResponse passenger) {
+			PassengerResponse passenger, String userEmail) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.reservationStatus = reservationStatus;
 		this.passenger = passenger;
+		this.userEmail = userEmail;
 	}
 
 	public Integer getId() {
@@ -62,6 +64,12 @@ public class ReservationResponse {
 
 	public void setPassenger(PassengerResponse passenger) {
 		this.passenger = passenger;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	
 	

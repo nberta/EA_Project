@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "d8fd7a75-67e2-4871-92a9-faa3ebf02244",
+		"name": "CS544-ASR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validation",
+			"item": [
+				{
+					"name": "validate login with post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjY1NjI1LCJleHAiOjE1OTIzNTIwMjV9.6iOrWeRIYozYU_0YDEC583w4m027JFAiKb-gjKpLUMuROu-6LkuIRNmCYwann-B4iHQk9GzPdj91acFmNGdJTA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjc4OTgyLCJleHAiOjE1OTIzNjUzODJ9.ep6cqgGJoEHlVRyl_8avolBY0AZrDcd9eB1KG00btrhr81vhb32kIsSFt_LUYGtC2HAsTsJ746IMc8dFvNuYLw",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate login with get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjc1NzQ3LCJleHAiOjE1OTIzNjIxNDd9.KfcZCfNe9kbSYPk6YFihl1i6Ggrg9r624a0ErfmyNZiAKNMK_nZwlHJ1Nqi1KMY8oMhtWLuj1dX0nlnMu3hJ1Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "login with admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@miu.edu\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with agent",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"agent@miu.edu\",\r\n    \"password\": \"agent\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login with passenger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"pass1@miu.edu\",\r\n    \"password\": \"pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Signup",
+			"item": [
+				{
+					"name": "Agent signup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjc4OTgyLCJleHAiOjE1OTIzNjUzODJ9.ep6cqgGJoEHlVRyl_8avolBY0AZrDcd9eB1KG00btrhr81vhb32kIsSFt_LUYGtC2HAsTsJ746IMc8dFvNuYLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"agent2@miu.edu\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/sign-up/agent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"sign-up",
+								"agent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Passenger signup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjc4OTgyLCJleHAiOjE1OTIzNjUzODJ9.ep6cqgGJoEHlVRyl_8avolBY0AZrDcd9eB1KG00btrhr81vhb32kIsSFt_LUYGtC2HAsTsJ746IMc8dFvNuYLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"passenger@miu.edu\",\r\n    \"password\": \"password\",\r\n    \"passengerId\": \"18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/sign-up/passenger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"sign-up",
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "http://localhost:8090/test/admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBtaXUuZWR1IiwiaWF0IjoxNTkyMjc4OTgyLCJleHAiOjE1OTIzNjUzODJ9.ep6cqgGJoEHlVRyl_8avolBY0AZrDcd9eB1KG00btrhr81vhb32kIsSFt_LUYGtC2HAsTsJ746IMc8dFvNuYLw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/test/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"test",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

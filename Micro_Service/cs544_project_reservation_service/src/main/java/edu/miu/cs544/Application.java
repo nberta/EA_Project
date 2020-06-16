@@ -64,14 +64,14 @@ public class Application implements CommandLineRunner {
         ReservationDetail red16 = new ReservationDetail(1248);
         
         /*Reservation*/
-        Reservation reservation1 = new Reservation("123451", passenger1, Arrays.asList(red1, red2));
-        Reservation reservation2 = new Reservation("123452", passenger1, Arrays.asList(red3, red4));
-        Reservation reservation3 = new Reservation("123453", passenger2, Arrays.asList(red5, red6));
-        Reservation reservation4 = new Reservation("123454", passenger2, Arrays.asList(red7, red8));
-        Reservation reservation5 = new Reservation("123455", passenger3, Arrays.asList(red9, red10));
-        Reservation reservation6 = new Reservation("123456", passenger3, Arrays.asList(red11, red12));
-        Reservation reservation7 = new Reservation("123457", passenger4, Arrays.asList(red13, red14));
-        Reservation reservation8 = new Reservation("123458", passenger4, Arrays.asList(red15, red16));
+        Reservation reservation1 = new Reservation("123451", passenger1, "omijiddorj@miu.edu", Arrays.asList(red1, red2));
+        Reservation reservation2 = new Reservation("123452", passenger1, "nberta@miu.edu", Arrays.asList(red3, red4));
+        Reservation reservation3 = new Reservation("123453", passenger2, "agent1@miu.edu", Arrays.asList(red5, red6));
+        Reservation reservation4 = new Reservation("123454", passenger2, "agent1@miu.edu", Arrays.asList(red7, red8));
+        Reservation reservation5 = new Reservation("123455", passenger3, "agent1@miu.edu", Arrays.asList(red9, red10));
+        Reservation reservation6 = new Reservation("123456", passenger3, "admin@miu.edu", Arrays.asList(red11, red12));
+        Reservation reservation7 = new Reservation("123457", passenger4, "admin@miu.edu", Arrays.asList(red13, red14));
+        Reservation reservation8 = new Reservation("123458", passenger4, "admin@miu.edu", Arrays.asList(red15, red16));
         
         red1.setReservation(reservation1);
         red2.setReservation(reservation1);

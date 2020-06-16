@@ -1,9 +1,11 @@
 package edu.miu.cs544.service.response;
 
+
 public class TicketResponse {
 	private Integer id;
 	private Long number;
-	private ReservationDetailResponse ReservationDetail;
+	private ReservationDetailResponse reservationDetail;
+	
 	public TicketResponse() {
 		super();
 	}
@@ -11,14 +13,14 @@ public class TicketResponse {
 	public TicketResponse(Long number, ReservationDetailResponse reservationDetail) {
 		super();
 		this.number = number;
-		ReservationDetail = reservationDetail;
+		this.reservationDetail = reservationDetail;
 	}
 
-	public TicketResponse(Integer id, Long number, edu.miu.cs544.service.response.ReservationDetailResponse reservationDetail) {
+	public TicketResponse(Integer id, Long number, ReservationDetailResponse reservationDetail) {
 		super();
 		this.id = id;
 		this.number = number;
-		ReservationDetail = reservationDetail;
+		this.reservationDetail = reservationDetail;
 	}
 
 	public Integer getId() {
@@ -34,11 +36,9 @@ public class TicketResponse {
 		this.number = number;
 	}
 	public ReservationDetailResponse getReservationDetail() {
-		return ReservationDetail;
+		return reservationDetail;
 	}
 	public void setReservationDetail(ReservationDetailResponse reservationDetail) {
-		ReservationDetail = reservationDetail;
+		this.reservationDetail = reservationDetail;
 	}
-	
-	
 }

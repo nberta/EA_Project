@@ -49,5 +49,21 @@ public class ReservationServiceImpl implements ReservationService {
 				.map(reservation -> new ReservationResponse(reservation))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<ReservationResponse> getAllByUserEmail(String userEmail) {
+		return reservationRepository.findByUserEmail(userEmail)
+				.parallelStream()
+				.map(reservation -> new ReservationResponse(reservation))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ReservationResponse> getAllByUserEmailAndPassengerId(String userEmail, Integer passengerId) {
+		return reservationRepository.findByUserEmailAndPassengerId(userEmail, passengerId)
+				.parallelStream()
+				.map(reservation -> new ReservationResponse(reservation))
+				.collect(Collectors.toList());
+	}
 	
 }

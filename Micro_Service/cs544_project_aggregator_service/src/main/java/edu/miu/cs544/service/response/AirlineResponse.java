@@ -9,7 +9,7 @@ public class AirlineResponse {
 	public AirlineResponse() {
 		super();
 	}
-	
+
 	public AirlineResponse(String code, String name, String history) {
 		super();
 		this.code = code;

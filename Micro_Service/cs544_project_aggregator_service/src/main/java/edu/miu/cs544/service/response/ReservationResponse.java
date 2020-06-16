@@ -1,38 +1,36 @@
 package edu.miu.cs544.service.response;
 
-import java.util.ArrayList;
-import java.util.List;
+import edu.miu.cs544.util.Constant.ReservationStatus;
 
 public class ReservationResponse {
 	private Integer id;
 	private String code;
+	private ReservationStatus reservationStatus;
 	private PassengerResponse passenger;
-	private List<ReservationDetailResponse> listReservationDetail = new ArrayList<ReservationDetailResponse>();
+	private String userEmail;
+	
 	public ReservationResponse() {
 		super();
 	}
-	
-	public ReservationResponse(String code, PassengerResponse passenger, List<ReservationDetailResponse> listReservationDetail) {
-		super();
-		this.code = code;
-		this.passenger = passenger;
-		this.listReservationDetail = listReservationDetail;
-	}
 
-	public ReservationResponse(Integer id, PassengerResponse passenger, List<ReservationDetailResponse> listReservationDetail) {
+	public ReservationResponse(Integer id, String code, ReservationStatus reservationStatus,
+			PassengerResponse passenger, String userEmail) {
 		super();
 		this.id = id;
+		this.code = code;
+		this.reservationStatus = reservationStatus;
 		this.passenger = passenger;
-		this.listReservationDetail = listReservationDetail;
+		this.userEmail = userEmail;
 	}
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -41,17 +39,26 @@ public class ReservationResponse {
 		this.code = code;
 	}
 
+	public ReservationStatus getReservationStatus() {
+		return reservationStatus;
+	}
+
+	public void setReservationStatus(ReservationStatus reservationStatus) {
+		this.reservationStatus = reservationStatus;
+	}
+
 	public PassengerResponse getPassenger() {
 		return passenger;
 	}
+
 	public void setPassenger(PassengerResponse passenger) {
 		this.passenger = passenger;
 	}
-	public List<ReservationDetailResponse> getListReservationDetail() {
-		return listReservationDetail;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setListReservationDetail(List<ReservationDetailResponse> listReservationDetail) {
-		this.listReservationDetail = listReservationDetail;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	
 	

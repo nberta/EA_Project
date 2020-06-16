@@ -1,8 +1,6 @@
 package edu.miu.cs544.service.response;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class PassengerResponse {
 	private Integer id;
@@ -11,24 +9,21 @@ public class PassengerResponse {
 	private Date dateOfBirth;
 	private String email;
 	private AddressResponse address;
-	private List<ReservationResponse> listReservation = new ArrayList<ReservationResponse>();
+
 	public PassengerResponse() {
 		super();
 	}
 	
-	public PassengerResponse(String firstName, String lastName, Date dateOfBirth, String email, AddressResponse address,
-			List<ReservationResponse> listReservation) {
+	public PassengerResponse(String firstName, String lastName, Date dateOfBirth, String email, AddressResponse address) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.address = address;
-		this.listReservation = listReservation;
 	}
 
-	public PassengerResponse(Integer id, String firstName, String lastName, Date dateOfBirth, String email,
-			AddressResponse address, List<ReservationResponse> listReservation) {
+	public PassengerResponse(Integer id, String firstName, String lastName, Date dateOfBirth, String email, AddressResponse address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -36,7 +31,6 @@ public class PassengerResponse {
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.address = address;
-		this.listReservation = listReservation;
 	}
 
 	public Integer getId() {
@@ -75,12 +69,4 @@ public class PassengerResponse {
 	public void setAddress(AddressResponse address) {
 		this.address = address;
 	}
-	public List<ReservationResponse> getListReservation() {
-		return listReservation;
-	}
-	public void setListReservation(List<ReservationResponse> listReservation) {
-		this.listReservation = listReservation;
-	}
-	
-	
 }
