@@ -1,13 +1,19 @@
 package edu.miu.cs544.service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.miu.cs544.domain.Address;
+import edu.miu.cs544.domain.Airport;
 import edu.miu.cs544.repository.AirportRepository;
+import edu.miu.cs544.repository.FlightRepository;
+import edu.miu.cs544.service.request.AirportRequest;
 import edu.miu.cs544.service.response.AirportResponse;
 
 @Service
@@ -16,6 +22,9 @@ public class AirportServiceImpl implements AirportService {
 	
 	@Autowired
 	private AirportRepository airportRepository;
+
+	@Autowired
+	private FlightRepository flightRepository;
 	
 	@Override
 	public AirportResponse getByCode(String code) {
@@ -34,4 +43,43 @@ public class AirportServiceImpl implements AirportService {
 				.map(a -> new AirportResponse(a))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public Collection<AirportResponse> saveAll(Collection<AirportRequest> airports) {
+		Collection<Airport> res = airports.stream().map(Airport::new).collect(Collectors.toList());
+		airportRepository.saveAll(res);
+		return res.stream().map(AirportResponse::new).collect(Collectors.toList());
+	}
+
+	@Override
+	public AirportResponse put(AirportRequest airportRequest, String code) {
+		Airport airport = airportRepository.findByCode(code);
+		
+		if (airport == null) {
+			airportRepository.save(new Airport(airportRequest));
+		} else {
+			airport.setAddress(new Address(airportRequest.getAddress()));
+			airport.setCode(airportRequest.getCode());
+			airport.setName(airportRequest.getName());
+			airportRepository.save(airport);
+		}
+		
+		return new AirportResponse(airport);
+	}
+
+	@Override
+	public AirportResponse deleteAirport(String code) {
+		Airport airport = airportRepository.findByCode(code);
+		if (airport != null) {
+			flightRepository.deleteAll(airport.getArrivalFlights());
+			flightRepository.deleteAll(airport.getDepartureFlights());
+			airportRepository.delete(airport);
+		} else {
+			throw new NoSuchElementException("Airport Doesn't exists");
+		}
+		return new AirportResponse();
+	}
+	
+	
+	
 }

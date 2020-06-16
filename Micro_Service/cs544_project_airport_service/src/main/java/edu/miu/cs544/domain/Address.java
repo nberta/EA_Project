@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import edu.miu.cs544.service.request.AddressRequest;
+
 @Entity
 public class Address {
 	@Id
@@ -25,6 +27,13 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+	}
+	
+	public Address(AddressRequest addressRequest) {
+		this.street = addressRequest.getStreet();
+		this.city = addressRequest.getCity();
+		this.state = addressRequest.getState();
+		this.zip = addressRequest.getZip();
 	}
 
 	public Integer getId() {

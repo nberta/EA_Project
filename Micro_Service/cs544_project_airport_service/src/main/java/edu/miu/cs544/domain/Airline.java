@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 
+import edu.miu.cs544.service.request.AirlineRequest;
+
 @Entity
 @SecondaryTable(name = "History")
 public class Airline {
@@ -32,6 +34,14 @@ public class Airline {
 		this.name = name;
 		this.history = history;
 	}
+	
+	public Airline(AirlineRequest airlineRequest) {
+		this.code = airlineRequest.getCode();
+		this.name = airlineRequest.getName();
+		this.name = airlineRequest.getHistory();
+
+	}
+
 
 	public Integer getId() {
 		return id;
