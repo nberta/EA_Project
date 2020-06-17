@@ -89,4 +89,31 @@ public class ReservationServiceImpl implements ReservationService {
 				flight.getDepartureAirport().getName(), flight.getArrivalAirport().getName(), flight.getDepartureDate(), flight.getArrivalDate());
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReservationResponse> getAllByUserEmail(String user_email) {
+		return restTemplate.getForObject(lookupUrlFor(reservationServiceName) + "/reservations?user_email="+user_email, List.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReservationResponse> getAllByUserEmailAndPassengerId(String user_email, Integer passenger_id) {
+		return restTemplate.getForObject(
+				lookupUrlFor(reservationServiceName) + "/reservations?user_email="+user_email+"&passenger_id="+passenger_id, List.class);
+	}
+
+	@Override
+	public ReservationResponse getByCodeAndPassengerId(String code, Integer passenger_id) {
+		return restTemplate.getForObject(lookupUrlFor(reservationServiceName) 
+				+ "/reservations?code="+code+"&passenger_id="+passenger_id, ReservationResponse.class);
+	}
+
+	@Override
+	public ReservationResponse getByCodeAndUserEmail(String code, String user_email) {
+		return restTemplate.getForObject(lookupUrlFor(reservationServiceName) 
+				+ "/reservations?code="+code+"&user_email="+user_email, ReservationResponse.class);
+	}
+
+	
+
 }
