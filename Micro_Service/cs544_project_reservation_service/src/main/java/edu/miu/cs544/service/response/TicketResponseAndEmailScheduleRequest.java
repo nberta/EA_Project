@@ -2,17 +2,15 @@ package edu.miu.cs544.service.response;
 
 import java.util.List;
 
-import edu.miu.cs544.domain.Passenger;
-
-public class TicketsAndEmailScheduleRequest {
+public class TicketResponseAndEmailScheduleRequest {
 	
 	private List<TicketResponse> tickets;
 	private PassengerResponse passenger;
 	
-	public TicketsAndEmailScheduleRequest() {
+	public TicketResponseAndEmailScheduleRequest() {
 		
 	}
-	public TicketsAndEmailScheduleRequest(List<TicketResponse> tickets, PassengerResponse passenger) {
+	public TicketResponseAndEmailScheduleRequest(List<TicketResponse> tickets, PassengerResponse passenger) {
 		super();
 		this.tickets = tickets;
 		this.passenger = passenger;

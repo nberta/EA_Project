@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 
-import edu.miu.cs544.service.request.AddressRequest;
 import edu.miu.cs544.service.request.PassengerRequest;
 
 @Entity

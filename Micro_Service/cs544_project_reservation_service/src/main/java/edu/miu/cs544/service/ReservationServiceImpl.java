@@ -17,12 +17,13 @@ import edu.miu.cs544.repository.ReservationRepository;
 import edu.miu.cs544.service.response.PassengerResponse;
 import edu.miu.cs544.service.response.ReservationResponse;
 import edu.miu.cs544.service.response.TicketResponse;
-import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
+import edu.miu.cs544.service.response.TicketResponseAndEmailScheduleRequest;
 import edu.miu.cs544.util.Constant.ReservationStatus;
 
 @Service
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
+	
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
@@ -32,16 +33,18 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private PassengerRepository passengerRepository;
   
-	@Autowired TicketService ticketService;
+	@Autowired
+	private TicketService ticketService;
 	
 	@Override
 	public ReservationResponse getByCode(String code) {
-		return new ReservationResponse(reservationRepository.findByCode(code));
+		Reservation reservation = reservationRepository.findByCode(code).get();
+		return new ReservationResponse(reservation);
 	}
 
 	@Override
 	public ReservationResponse cancelReservation(String code) {
-		Reservation reservation = reservationRepository.findByCode(code);
+		Reservation reservation = reservationRepository.findByCode(code).get();
 		if(reservation.getReservationStatus() == ReservationStatus.CONFIRMED) {
 			throw new RuntimeException("Cannot cancel a confirmed reservation.");
 		}
@@ -66,7 +69,7 @@ public class ReservationServiceImpl implements ReservationService {
 				.collect(Collectors.toList());
 	}
   
-  @Override
+	@Override
 	public List<ReservationResponse> getAllByUserEmail(String userEmail) {
 		return reservationRepository.findByUserEmail(userEmail)
 				.parallelStream()
@@ -83,11 +86,11 @@ public class ReservationServiceImpl implements ReservationService {
 	}
   
 	@Override
-	public TicketsAndEmailScheduleRequest finalizeReservation(String code) {
+	public TicketResponseAndEmailScheduleRequest finalizeReservation(String code) {
 		Passenger passenger = getPassengerByReservationCode(code);
 		List<TicketResponse> tickets = ticketService.purchaseTickets(code, passenger.getId());
 		PassengerResponse passengerResponse = new PassengerResponse(passenger);
-		return new TicketsAndEmailScheduleRequest(tickets, passengerResponse);
+		return new TicketResponseAndEmailScheduleRequest(tickets, passengerResponse);
 	}
 	
 	@Override
@@ -114,6 +117,6 @@ public class ReservationServiceImpl implements ReservationService {
 	}	
   
 	private Passenger getPassengerByReservationCode(String code) {
-		return reservationRepository.findByCode(code).getPassenger();
+		return reservationRepository.findByCode(code).get().getPassenger();
   }
 }

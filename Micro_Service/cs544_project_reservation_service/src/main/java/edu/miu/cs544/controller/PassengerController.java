@@ -4,7 +4,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,10 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import edu.miu.cs544.exception.InvalidIdException;
 import edu.miu.cs544.service.PassengerService;
 import edu.miu.cs544.service.request.PassengerRequest;
 import edu.miu.cs544.service.response.PassengerResponse;
@@ -29,11 +27,15 @@ public class PassengerController {
 	@GetMapping
 	public List<PassengerResponse> getAll() {
 		return passengerService.getAll();
-	}
+	} 
 	
-	@GetMapping(params = {"id"})
-	public PassengerResponse getById(@RequestParam Integer id) {
-		return passengerService.getById(id);
+	@GetMapping("/{id}")
+	public PassengerResponse getById(@PathVariable Integer id) {
+		try {
+			return passengerService.getById(id);
+		} catch (IllegalArgumentException ex) {
+			throw new InvalidIdException("Passenger id does not exist", ex);
+		}		
 	}
 	
 	@PostMapping("/new")
@@ -50,7 +52,7 @@ public class PassengerController {
 		try {
 			return passengerService.deleteById(id);
 		} catch (IllegalArgumentException ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passenger id does not exist", ex);
+			throw new InvalidIdException("Passenger id does not exist", ex);
 		}
 		
 	}
