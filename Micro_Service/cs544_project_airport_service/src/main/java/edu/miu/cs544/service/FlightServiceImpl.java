@@ -1,6 +1,7 @@
 package edu.miu.cs544.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -119,5 +120,13 @@ public class FlightServiceImpl implements FlightService {
 			throw new NoSuchElementException("Flight doesn't exists");
 		}
 		return new FlightResponse();
+	}
+
+	@Override
+	public List<FlightResponse> getDepartureAndDestination(Date departure_date, String departure_airport, String arrival_airport) {
+		List<Flight> flightList =
+				flightRepository.findByDepartureAirportCodeAndArrivalAirportCodeAndDepartureDateAfter(departure_airport,
+						arrival_airport,departure_date);
+		return flightList.stream().map(FlightResponse::new).collect(Collectors.toList());
 	}
 }

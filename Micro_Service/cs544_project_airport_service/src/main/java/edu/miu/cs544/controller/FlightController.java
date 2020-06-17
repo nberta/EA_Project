@@ -1,6 +1,7 @@
 package edu.miu.cs544.controller;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -69,6 +70,16 @@ public class FlightController {
 		} 
 		
 		return new FlightResponse();
+	}
+	@GetMapping("/available")
+	public List<FlightResponse> getAllflightBetweenDepartureAndDestinationForADate(@RequestParam Date departure_date,
+																			  @RequestParam String departure_airport,
+																			  @RequestParam String arrival_airport
+	)
+	{
+		System.out.println(departure_date);
+		return flightService.getDepartureAndDestination(departure_date,departure_airport,arrival_airport);
+
 	}
 	
 }
