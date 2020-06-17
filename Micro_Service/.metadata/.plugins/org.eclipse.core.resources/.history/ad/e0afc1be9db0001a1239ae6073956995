@@ -1,0 +1,30 @@
+package edu.miu.cs544.emailservice;
+
+import javax.mail.Session;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class QuartzEmailApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(QuartzEmailApplication.class, args);
+	}
+
+	@Bean("mailProperties")
+	public MailProperties getMailProperties() {
+		MailProperties mailProperties = new MailProperties();
+		mailProperties.setUsername("testing.email.service.cs544@gmail.com");
+		mailProperties.setPassword("leavenbread4");
+		return mailProperties;
+	}
+	@Bean("session")
+	public Session getSession() {
+		
+	}
+}

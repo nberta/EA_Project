@@ -4,9 +4,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,27 +31,27 @@ public class PassengerController {
 	} 
 	
 	@GetMapping("/{id}")
-	public PassengerResponse getById(@PathVariable Integer id) {
+	public ResponseEntity<PassengerResponse> getById(@PathVariable Integer id) {
 		try {
-			return passengerService.getById(id);
+			return ResponseEntity.ok(passengerService.getById(id));
 		} catch (IllegalArgumentException ex) {
 			throw new InvalidIdException("Passenger id does not exist", ex);
 		}		
 	}
 	
 	@PostMapping("/new")
-	public PassengerResponse newPassenger(@RequestBody PassengerRequest passengerRequest) {
-		return passengerService.save(passengerRequest);
+	public ResponseEntity<PassengerResponse> newPassenger(@RequestBody PassengerRequest passengerRequest) {
+		return ResponseEntity.ok(passengerService.save(passengerRequest));
 	}
 	
-	@PatchMapping("/{id}")
-	public PassengerResponse putPassenger(@RequestBody PassengerRequest passengerRequest, @PathVariable Integer id) {
-		return passengerService.putPassenger(passengerRequest, id);		
+	@PutMapping("/{id}")
+	public ResponseEntity<PassengerResponse> putPassenger(@RequestBody PassengerRequest passengerRequest, @PathVariable Integer id) {
+		return ResponseEntity.ok(passengerService.putPassenger(passengerRequest, id));		
 	}
 	@DeleteMapping("/{id}")
-	public PassengerResponse deletePassenger(@PathVariable Integer id) {
+	public ResponseEntity<PassengerResponse> deletePassenger(@PathVariable Integer id) {
 		try {
-			return passengerService.deleteById(id);
+			return ResponseEntity.ok(passengerService.deleteById(id));
 		} catch (IllegalArgumentException ex) {
 			throw new InvalidIdException("Passenger id does not exist", ex);
 		}

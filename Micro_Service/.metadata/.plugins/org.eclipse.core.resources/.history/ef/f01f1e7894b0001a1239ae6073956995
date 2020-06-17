@@ -1,0 +1,8 @@
+package edu.miu.cs544.advice;
+
+import org.aspectj.lang.annotation.Aspect;
+
+@Aspect
+public class ReservationAdvice {
+
+}

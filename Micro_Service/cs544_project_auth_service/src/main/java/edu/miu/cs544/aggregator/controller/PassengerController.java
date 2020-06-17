@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -53,15 +54,19 @@ public class PassengerController {
 		return passengerService.getById(id);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN') or hasRole('AGENT')")
 	@PostMapping("/new")
 	public PassengerResponse newPassenger(@RequestBody PassengerRequest passengerRequest) {
 		return passengerService.save(passengerRequest);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN') or hasRole('AGENT')")
 	@PutMapping("/{id}")
 	public PassengerResponse putPassenger(@RequestBody PassengerRequest passengerRequest, @PathVariable Integer id) {
 		return passengerService.putPassenger(passengerRequest, id);		
 	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public PassengerResponse deletePassenger(@PathVariable Integer id) {
 		return passengerService.deleteById(id);

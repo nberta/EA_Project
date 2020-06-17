@@ -1,0 +1,21 @@
+package edu.miu.cs544.aggregator.service;
+
+import java.util.List;
+
+import edu.miu.cs544.service.aggregator.response.ReservationResponse;
+import edu.miu.cs544.service.aggregator.response.ScheduleEmailResponse;
+import edu.miu.cs544.service.aggregator.response.TicketResponseAndEmailScheduleRequest;
+
+public interface ReservationService {
+	ReservationResponse getByCode(String code);
+	List<ReservationResponse> getAll();
+	List<ReservationResponse> getAllByPassengerId(Integer id);
+	TicketResponseAndEmailScheduleRequest finalizeReservation(String code);
+	List<ReservationResponse> getAllByUserEmail(String email);
+	ReservationResponse cancelReservation(String code);
+	List<Integer> getAllFlightsByReservationCode(String code);
+	ReservationResponse makeReservation(Integer id, List<Integer> flightNumbers);
+	List<ReservationResponse> getAllByUserEmail(String email);
+	ReservationResponse cancelReservation(String code);
+	List<Integer> getAllFlightsByReservationCode(String code);
+}

@@ -1,0 +1,5 @@
+package edu.miu.cs544.exception;
+
+public class InvalidIdException extends RuntimeException {
+
+}

@@ -3,12 +3,14 @@ package edu.miu.cs544.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs544.service.ReservationService;
@@ -26,15 +28,16 @@ public class ReservationController {
 	private ReservationService reservationService;
 		
 	@GetMapping
-	public List<ReservationResponse> getAll() {
-		return reservationService.getAll();
+	public ResponseEntity<List<ReservationResponse>> getAll() {
+		return ResponseEntity.ok(reservationService.getAll());
 	}
 	
-	@GetMapping("/{code}")
-	public ReservationResponse getByCode(@PathVariable String code) {
-		return reservationService.getByCode(code);
+	@GetMapping(params= {"code"})
+	public ResponseEntity<ReservationResponse> getByCode(@RequestParam String code) {
+		return ResponseEntity.ok(reservationService.getByCode(code));
 	}
 	
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 	@GetMapping("/passenger/{id}")
 	public List<ReservationResponse> getAllReservationByPassengerId(@PathVariable Integer id) {
@@ -70,25 +73,36 @@ public class ReservationController {
 	public List<ReservationResponse> getAllByUserEmailAndPassengerId(@RequestParam String user_email, @RequestParam Integer passenger_id) {
 		return reservationService.getAllByUserEmailAndPassengerId(user_email, passenger_id);
 >>>>>>> Stashed changes
+=======
+	@GetMapping(params= {"passenger_id"})
+	public ResponseEntity<List<ReservationResponse>> getAllReservationByPassengerId(@RequestParam Integer id) {
+		return ResponseEntity.ok(reservationService.getAllByPassengerId(id));
+		
 	}
 	
-	@DeleteMapping("/{code}")
-	public ReservationResponse cancelReservation(@PathVariable String code) {
-		return reservationService.cancelReservation(code);
+	@GetMapping(params= {"email"})
+	public ResponseEntity<List<ReservationResponse>> getAllReservationByUserEmail(@RequestParam String email) {
+		return ResponseEntity.ok(reservationService.getAllByUserEmail(email));
+>>>>>>> Stashed changes
+	}
+	
+	@PatchMapping("/{code}")
+	public ResponseEntity<ReservationResponse> cancelReservation(@PathVariable String code) {
+		return ResponseEntity.ok(reservationService.cancelReservation(code));
 	}
   
 	@GetMapping("/{code}/flights")
-	public List<Integer> getAllFlightByReservationCode(@PathVariable String code) {
-	   return reservationService.getAllFlightsByReservationCode(code);
+	public ResponseEntity<List<Integer>> getAllFlightByReservationCode(@PathVariable String code) {
+	   return ResponseEntity.ok(reservationService.getAllFlightsByReservationCode(code));
 	}
 	
 	@PostMapping("/passenger/{id}")
-	public ReservationResponse makeReservation(@PathVariable Integer id, @RequestBody List<Integer> flightNumbers){
-		return reservationService.makeReservation(id, flightNumbers);			
+	public ResponseEntity<ReservationResponse> makeReservation(@PathVariable Integer id, @RequestBody List<Integer> flightNumbers){
+		return ResponseEntity.ok(reservationService.makeReservation(id, flightNumbers));			
 	}
     
 	@PostMapping("/{code}/tickets")
-	public TicketResponseAndEmailScheduleRequest finalizeReservation(@PathVariable String code) {
-		return reservationService.finalizeReservation(code);
+	public ResponseEntity<TicketResponseAndEmailScheduleRequest> finalizeReservation(@PathVariable String code) {
+		return ResponseEntity.ok(reservationService.finalizeReservation(code));
 	}
 }

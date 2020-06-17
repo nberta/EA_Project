@@ -1,0 +1,22 @@
+package edu.miu.cs544.advice;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.context.annotation.Configuration;
+
+import edu.miu.cs544.exception.InvalidIdException;
+
+@Aspect
+@Configuration
+public class ReservationAdvice {
+	
+	@Around("execute ")
+	public void around(ProceedingJoinPoint joinPoint) {
+		try {
+			Object o = joinPoint.proceed();
+		} catch (IllegalArgumentException ex){
+			throw new InvalidIdException("Passenger id does not exist", ex);
+		}		
+	}
+}

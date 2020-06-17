@@ -1,0 +1,19 @@
+package edu.miu.cs544.exception;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import edu.miu.cs544.service.response.ExceptionResponse;
+
+@ControllerAdvice
+public class ControllerAdviceExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	@ExceptionHandler(InvalidIdException.class)
+	public ResponseEntity<ExceptionResponse> handleInvalidId(InvalidIdException ex) {
+		
+	}
+
+}

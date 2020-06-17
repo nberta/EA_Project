@@ -85,10 +85,13 @@ public class ReservationServiceImpl implements ReservationService {
 		PassengerResponse passenger = ticketsAndEmailScheduleRequest.getPassenger();
 		ReservationDetailResponse detail = details.get(0);
 		FlightResponse flight = flightService.getByNumber(detail.getFlightNumber());
-		return new ScheduleEmailRequest(passenger.getEmail(), passenger.getFirstName(), passenger.getLastName(), flight.getNumber(), flight.getAirline().getName(),
-				flight.getDepartureAirport().getName(), flight.getArrivalAirport().getName(), flight.getDepartureDate(), flight.getArrivalDate());
+		return new ScheduleEmailRequest(passenger.getEmail(), passenger.getFirstName(), 
+				passenger.getLastName(), flight.getNumber(), flight.getAirline().getName(),
+				flight.getDepartureAirport().getName(), flight.getArrivalAirport().getName(), 
+				flight.getDepartureDate(), flight.getArrivalDate());
 	}
 
+<<<<<<< Updated upstream
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReservationResponse> getAllByUserEmail(String user_email) {
@@ -115,5 +118,44 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	
+=======
+	
+	@Override
+	public ReservationResponse makeReservation(Integer id, List<Integer> flightNumbers) {
+		HttpEntity<String> request = prepareHttpRequest(flightNumbers);
+		return restTemplate.postForObject(lookupUrlFor(reservationServiceName) + "/reservations/" + id,
+				request, ReservationResponse.class);
+	}
+
+	@Override
+	public List<ReservationResponse> getAllByUserEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReservationResponse cancelReservation(String code) {
+		HttpEntity<String> request = prepareHttpRequest("");
+		return restTemplate.postForObject(lookupUrlFor(reservationServiceName) + "/reservations?code=" + code ,
+				request, ReservationResponse.class);
+	}
+
+	@Override
+	public List<FlightResponse> getAllFlightsByReservationCode(String code) {
+		@SuppressWarnings("unchecked")
+		List<Integer> flightNumbers = restTemplate.getForObject(lookupUrlFor(reservationServiceName) 
+				+ "/reservations?code=" + code  , List.class);
+		return flightService.getAllByNumbers(flightNumbers);
+	}
+	
+	private HttpEntity<String> prepareHttpRequest(Object token) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		JSONObject json = new JSONObject(token);
+		HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
+		return request;
+	}
+
+>>>>>>> Stashed changes
 
 }

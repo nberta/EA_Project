@@ -3,11 +3,11 @@ package edu.miu.cs544.aggregator.service;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -55,13 +55,19 @@ public class PassengerServiceImpl implements PassengerService {
 	@Override
 	public PassengerResponse putPassenger(PassengerRequest passengerRequest, Integer id) {
 		HttpEntity<String> request = prepareHttpRequest(passengerRequest);
-		return restTemplate.patchForObject(lookupUrlFor(reservationServiceName) + "/passengers/" + id, request, PassengerResponse.class);
+		return restTemplate.exchange(lookupUrlFor(reservationServiceName) + "/passengers/" + id, 
+				HttpMethod.PUT, request, PassengerResponse.class).getBody();
 	}
 
 	@Override
 	public PassengerResponse deleteById(Integer id) {
+<<<<<<< Updated upstream
 		//return restTemplate.deleteForObject(lookupUrlFor(reservationServiceName) + "/passengers/" + id, PassengerResponse.class);
 		return null;
+=======
+		return restTemplate.exchange(lookupUrlFor(reservationServiceName) + "/passengers/" + id,
+				HttpMethod.DELETE, new HttpEntity<>(""), PassengerResponse.class).getBody();
+>>>>>>> Stashed changes
 	}
 	
 	private HttpEntity<String> prepareHttpRequest(Object token) {

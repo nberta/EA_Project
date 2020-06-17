@@ -1,0 +1,16 @@
+package edu.miu.cs544.advice;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.context.annotation.Configuration;
+
+@Aspect
+@Configuration
+public class ReservationAdvice {
+	
+	@Around("execute ")
+	public void around(ProceedingJoinPoint joinPoint) {
+		
+	}
+}
