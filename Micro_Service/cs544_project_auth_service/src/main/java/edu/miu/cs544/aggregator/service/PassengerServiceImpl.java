@@ -11,6 +11,7 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 import edu.miu.cs544.service.aggregator.response.PassengerResponse;
+import edu.miu.cs544.service.request.PassengerRequest;
 
 @Service
 public class PassengerServiceImpl implements PassengerService {
@@ -38,6 +39,24 @@ public class PassengerServiceImpl implements PassengerService {
 	@Override
 	public List<PassengerResponse> getAll() {
 		return restTemplate.getForObject(lookupUrlFor(reservationServiceName) + "/passengers", List.class);
+	}
+
+	@Override
+	public PassengerResponse save(PassengerRequest passengerRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PassengerResponse putPassenger(PassengerRequest passengerRequest, Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PassengerResponse deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
