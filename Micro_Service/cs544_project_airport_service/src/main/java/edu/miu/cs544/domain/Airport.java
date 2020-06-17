@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import edu.miu.cs544.service.request.AirportRequest;
+
 @Entity
 public class Airport {
 	@Id
@@ -44,6 +46,12 @@ public class Airport {
 		this.code = code;
 		this.name = name;
 		this.address = address;
+	}
+	
+	public Airport(AirportRequest airportRequest) {
+		this.code = airportRequest.getCode();
+		this.name = airportRequest.getName();
+		this.address = new Address(airportRequest.getAddress());
 	}
 
 	public Integer getId() {
