@@ -1,5 +1,6 @@
 package edu.miu.cs544.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +23,8 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
 
 	Flight findFirstByArrivalAirportOrDepartureAirport(Airport arrivalAirport, Airport departureAirport);
 	Flight findFirstByAirline(Airline airline);
+	List<Flight> findByDepartureAirportCodeAndArrivalAirportCodeAndDepartureDateAfter(String departureAirportCode,
+																					  String arrivalAirportCode,
+																					  Date departure_date);
+
 }

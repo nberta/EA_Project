@@ -1,6 +1,7 @@
 package edu.miu.cs544.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import edu.miu.cs544.service.request.FlightRequest;
@@ -15,4 +16,5 @@ public interface FlightService {
 	Collection<FlightResponse> saveAll(Collection<FlightRequest> flights);
 	FlightResponse put(FlightRequest flightRequest, Integer flightNumber);
 	FlightResponse deleteFlight(Integer flightNumber);
+	List<FlightResponse> getDepartureAndDestination(Date departure_date, String departure_airport, String arrival_airport);
 }
