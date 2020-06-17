@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import edu.miu.cs544.domain.Address;
+import edu.miu.cs544.domain.Flight;
+import edu.miu.cs544.repository.AddressRepository;
+import edu.miu.cs544.repository.FlightRepository;
+import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +28,9 @@ public class AirlineServiceImpl implements AirlineService {
 
 	@Autowired
 	private FlightService flightService;
+
+	@Autowired
+	private FlightRepository flightRepository;
 
 	@Override
 	public AirlineResponse getById(Integer id) {
@@ -73,7 +81,11 @@ public class AirlineServiceImpl implements AirlineService {
 	public AirlineResponse deleteAirline(String code) {
 		Airline airline = airlineRepository.findByCode(code);
 		if (airline != null) {
-			airlineRepository.delete(airline);
+			Flight flight = flightRepository.findFirstByAirline(airline);
+			if (flight == null)
+				airlineRepository.delete(airline);
+			else
+				throw new IllegalArgumentException("Airline has a flight");
 		} else {
 			throw new NoSuchElementException("Airline doesn't exists");
 		}

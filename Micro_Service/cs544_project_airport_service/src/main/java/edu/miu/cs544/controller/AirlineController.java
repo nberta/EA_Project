@@ -58,7 +58,9 @@ public class AirlineController {
 			return airlineService.deleteAirline(code);
 		} catch (NoSuchElementException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Airline doesn't exist", ex);
-		} 
+		} catch (IllegalArgumentException ex) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Airline has a flight or flights", ex);
+		}
 	}
 	
 }

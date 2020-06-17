@@ -44,12 +44,20 @@ public class FlightController {
 	
 	@PostMapping
 	public Collection<FlightResponse> saveFlights(@RequestBody Collection<FlightRequest> flights) {
-		return flightService.saveAll(flights);
+		try {
+			return flightService.saveAll(flights);
+		} catch (IllegalArgumentException ex) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Airline code or Airport code not exist!!!", ex);
+		}
 	}
 	
 	@PutMapping("/{flightNumber}")
 	public FlightResponse putFlights(@RequestBody FlightRequest flightRequest, @PathVariable Integer flightNumber) {
-		return flightService.put(flightRequest, flightNumber);
+		try {
+			return flightService.put(flightRequest, flightNumber);
+		} catch (IllegalArgumentException ex) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Airline code or Airport code not exist!!!", ex);
+		}
 	}
 	
 	@DeleteMapping("/{flightNumber}")

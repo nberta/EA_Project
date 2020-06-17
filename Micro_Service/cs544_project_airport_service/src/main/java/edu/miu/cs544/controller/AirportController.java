@@ -52,8 +52,10 @@ public class AirportController {
 		try {
 			return airportService.deleteAirport(code);
 		} catch (NoSuchElementException ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Airport doesn't exist", ex);
-		} 
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+		} catch (IllegalArgumentException ex) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, ex.getMessage());
+		}
 	}
 	
 }

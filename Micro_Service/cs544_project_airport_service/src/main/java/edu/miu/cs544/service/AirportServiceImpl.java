@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import edu.miu.cs544.domain.Flight;
+import edu.miu.cs544.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,9 @@ public class AirportServiceImpl implements AirportService {
 
 	@Autowired
 	private FlightRepository flightRepository;
+  
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	@Override
 	public AirportResponse getByCode(String code) {
@@ -54,7 +59,6 @@ public class AirportServiceImpl implements AirportService {
 	@Override
 	public AirportResponse put(AirportRequest airportRequest, String code) {
 		Airport airport = airportRepository.findByCode(code);
-		
 		if (airport == null) {
 			airportRepository.save(new Airport(airportRequest));
 		} else {
@@ -71,15 +75,17 @@ public class AirportServiceImpl implements AirportService {
 	public AirportResponse deleteAirport(String code) {
 		Airport airport = airportRepository.findByCode(code);
 		if (airport != null) {
-			flightRepository.deleteAll(airport.getArrivalFlights());
-			flightRepository.deleteAll(airport.getDepartureFlights());
-			airportRepository.delete(airport);
+			Flight flight = flightRepository.findFirstByArrivalAirportOrDepartureAirport(airport, airport);
+			if (flight == null) {
+				Address address = addressRepository.findById(airport.getAddress().getId()).get();
+				addressRepository.delete(address);
+				airportRepository.delete(airport);
+			}
+			else
+				throw new IllegalArgumentException("Airport has a flight");
 		} else {
-			throw new NoSuchElementException("Airport Doesn't exists");
+			throw new NoSuchElementException("Airport doesn't exists");
 		}
 		return new AirportResponse();
 	}
-	
-	
-	
 }
