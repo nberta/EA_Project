@@ -79,9 +79,8 @@ public class FlightServiceImpl implements FlightService {
 			Flight flight = new Flight(f.getNumber(), f.getCapacity(), airline, departureAirport, arrivalAirport, f.getDepartureDate(), f.getArrivalDate());
 			res.add(flight);
 		}
-
-		flightRepository.saveAll(res);
-
+    flightRepository.saveAll(res);
+    
 		return res.stream().map(FlightResponse::new).collect(Collectors.toList());
 	}
 
@@ -91,7 +90,7 @@ public class FlightServiceImpl implements FlightService {
 		Airport arrivalAirport = airportRepository.findByCode(flightRequest.getArrivalAirportCode());
 		Airport departureAirport = airportRepository.findByCode(flightRequest.getDepartureAirportCode());
 		if (airline == null || arrivalAirport == null || departureAirport == null) {
-			throw new IllegalArgumentException("Airline code or Airport code not exist!!!");
+      throw new IllegalArgumentException("Airline code or Airport code not exist!!!");
 		}
 
 		Flight flight = flightRepository.findByNumber(flightNumber);
@@ -108,9 +107,7 @@ public class FlightServiceImpl implements FlightService {
 			flight.setDepartureDate(flightRequest.getDepartureDate());
 			flight.setArrivalDate(flightRequest.getArrivalDate());
 		}
-
-		return new FlightResponse(flight);
-
+    return new FlightResponse(flight);
 	}
 
 	@Override
@@ -121,7 +118,6 @@ public class FlightServiceImpl implements FlightService {
 		} else {
 			throw new NoSuchElementException("Flight doesn't exists");
 		}
-
 		return new FlightResponse();
 	}
 }

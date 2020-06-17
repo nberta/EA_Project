@@ -53,8 +53,7 @@ public class AirportController {
 			return airportService.deleteAirport(code);
 		} catch (NoSuchElementException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
-		}
-		catch (IllegalArgumentException ex) {
+		} catch (IllegalArgumentException ex) {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, ex.getMessage());
 		}
 	}

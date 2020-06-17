@@ -27,7 +27,7 @@ public class AirportServiceImpl implements AirportService {
 
 	@Autowired
 	private FlightRepository flightRepository;
-
+  
 	@Autowired
 	private AddressRepository addressRepository;
 	
@@ -88,5 +88,4 @@ public class AirportServiceImpl implements AirportService {
 		}
 		return new AirportResponse();
 	}
-
 }
