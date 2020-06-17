@@ -1,7 +1,6 @@
-package edu.miu.cs544.service;
+package edu.miu.cs544.security.service;
 
 import edu.miu.cs544.security.jwt.JwtUtils;
-import edu.miu.cs544.security.service.JwtUserDetails;
 import edu.miu.cs544.service.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class AuthValidationServiceImpl implements AuthValidationService {
 
     @Autowired
     @Qualifier("JwtUserDetailsService")

@@ -2,7 +2,7 @@ package edu.miu.cs544.controllers;
 
 import edu.miu.cs544.exception.AuthenticationException;
 import edu.miu.cs544.exception.JwtTokenException;
-import edu.miu.cs544.service.AuthenticationService;
+import edu.miu.cs544.security.service.AuthValidationService;
 import edu.miu.cs544.service.request.LoginRequest;
 import edu.miu.cs544.service.response.JwtResponse;
 import edu.miu.cs544.security.jwt.JwtUtils;
@@ -30,7 +30,7 @@ public class AuthenticationController {
 	JwtUtils jwtUtils;
 
 	@Autowired
-	private AuthenticationService authenticationService;
+	private AuthValidationService authValidationService;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
@@ -43,7 +43,7 @@ public class AuthenticationController {
 	@PostMapping(value = "/validate")
 	@PreAuthorize("hasRole('PASSENGER') or hasRole('ADMIN') or hasRole('AGENT')")
 	public UserResponse validateToken(@RequestBody String token) {
-		return authenticationService.validateToken(token);
+		return authValidationService.validateToken(token);
 	}
 	
 	@GetMapping(value = "/validate")
@@ -53,7 +53,7 @@ public class AuthenticationController {
 			throw new JwtTokenException("No JWT token found in request headers.");
 		}
 		String token = header.substring(7);
-		return authenticationService.validateToken(token);
+		return authValidationService.validateToken(token);
 	}
 
 	private Authentication authenticate(String username, String password) {
