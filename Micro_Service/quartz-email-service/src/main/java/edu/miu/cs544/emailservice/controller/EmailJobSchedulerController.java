@@ -1,9 +1,6 @@
-package edu.miu.cs.airlineregistrationsystem.emailservice.controller;
+package edu.miu.cs544.emailservice.controller;
 
 
-import edu.miu.cs.airlineregistrationsystem.emailservice.service.EmailSchedulingService;
-import edu.miu.cs.airlineregistrationsystem.emailservice.service.request.ScheduleEmailRequest;
-import edu.miu.cs.airlineregistrationsystem.emailservice.service.response.ScheduleEmailResponse;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import edu.miu.cs544.emailservice.service.EmailSchedulingService;
+import edu.miu.cs544.emailservice.service.request.ScheduleEmailRequest;
+import edu.miu.cs544.emailservice.service.response.ScheduleEmailResponse;
 
 import javax.validation.Valid;
 import java.time.ZoneId;

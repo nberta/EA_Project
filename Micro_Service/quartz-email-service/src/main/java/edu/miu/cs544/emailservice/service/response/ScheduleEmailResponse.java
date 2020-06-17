@@ -1,4 +1,4 @@
-package edu.miu.cs.airlineregistrationsystem.emailservice.service.response;
+package edu.miu.cs544.emailservice.service.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

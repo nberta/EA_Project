@@ -1,4 +1,4 @@
-package edu.miu.cs.airlineregistrationsystem.emailservice.service.request;
+package edu.miu.cs544.emailservice.service.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

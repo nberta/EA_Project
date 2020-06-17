@@ -1,4 +1,4 @@
-package edu.miu.cs.airlineregistrationsystem.emailservice.domain;
+package edu.miu.cs544.emailservice.domain;
 
 public abstract class Email {
 
