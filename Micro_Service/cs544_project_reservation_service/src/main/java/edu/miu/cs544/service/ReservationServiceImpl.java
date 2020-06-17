@@ -119,4 +119,14 @@ public class ReservationServiceImpl implements ReservationService {
 	private Passenger getPassengerByReservationCode(String code) {
 		return reservationRepository.findByCode(code).get().getPassenger();
   }
+
+	@Override
+	public ReservationResponse getByCodeAndPassengerId(String code, Integer passenger_id) {
+		return new ReservationResponse(reservationRepository.findByCodeAndPassengerId(code, passenger_id));
+	}
+
+	@Override
+	public ReservationResponse getByCodeAndUserEmail(String code, String user_email) {
+		return new ReservationResponse(reservationRepository.findByCodeAndUserEmail(code, user_email));
+	}
 }

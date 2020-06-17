@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs544.service.ReservationService;
 import edu.miu.cs544.service.response.ReservationResponse;
+<<<<<<< Updated upstream
 import edu.miu.cs544.service.response.TicketResponseAndEmailScheduleRequest;
+=======
+import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
+>>>>>>> Stashed changes
 
 @RestController
 @RequestMapping("reservations")
@@ -31,6 +35,7 @@ public class ReservationController {
 		return reservationService.getByCode(code);
 	}
 	
+<<<<<<< Updated upstream
 	@GetMapping("/passenger/{id}")
 	public List<ReservationResponse> getAllReservationByPassengerId(@PathVariable Integer id) {
 		return reservationService.getAllByPassengerId(id);
@@ -40,6 +45,31 @@ public class ReservationController {
 	@GetMapping("/email/{email}")
 	public List<ReservationResponse> getAllReservationByUserEmail(@PathVariable String email) {
 		return reservationService.getAllByUserEmail(email);
+=======
+	@GetMapping
+	public ReservationResponse getByCodeAndPassengerId(@RequestParam String code, @RequestParam Integer passenger_id) {
+		return reservationService.getByCodeAndPassengerId(code, passenger_id);
+	}
+	
+	@GetMapping
+	public ReservationResponse getByCodeAndUserEmail(@RequestParam String code, @RequestParam String user_email) {
+		return reservationService.getByCodeAndUserEmail(code, user_email);
+	}
+	
+	@GetMapping(params = {"passenger_id"})
+	public List<ReservationResponse> getAllReservationByPassengerId(@RequestParam Integer passenger_id) {
+		return reservationService.getAllByPassengerId(passenger_id);
+	}
+	
+	@GetMapping(params = {"user_email"})
+	public List<ReservationResponse> getAllByUserEmail(@RequestParam String user_email) {
+		return reservationService.getAllByUserEmail(user_email);
+	}
+	
+	@GetMapping(params = {"user_email", "passenger_id"})
+	public List<ReservationResponse> getAllByUserEmailAndPassengerId(@RequestParam String user_email, @RequestParam Integer passenger_id) {
+		return reservationService.getAllByUserEmailAndPassengerId(user_email, passenger_id);
+>>>>>>> Stashed changes
 	}
 	
 	@DeleteMapping("/{code}")
