@@ -2,15 +2,15 @@ package edu.miu.cs544.service.aggregator.response;
 
 import java.util.List;
 
-public class TicketsAndEmailScheduleRequest {
+public class TicketResponseAndEmailScheduleRequest {
 	
 	private List<TicketResponse> tickets;
 	private PassengerResponse passenger;
 	
-	public TicketsAndEmailScheduleRequest() {
+	public TicketResponseAndEmailScheduleRequest() {
 		
 	}
-	public TicketsAndEmailScheduleRequest(List<TicketResponse> tickets, PassengerResponse passenger) {
+	public TicketResponseAndEmailScheduleRequest(List<TicketResponse> tickets, PassengerResponse passenger) {
 		super();
 		this.tickets = tickets;
 		this.passenger = passenger;

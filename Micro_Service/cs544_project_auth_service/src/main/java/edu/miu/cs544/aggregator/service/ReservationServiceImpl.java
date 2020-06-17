@@ -21,7 +21,7 @@ import edu.miu.cs544.service.aggregator.response.ReservationDetailResponse;
 import edu.miu.cs544.service.aggregator.response.ReservationResponse;
 import edu.miu.cs544.service.aggregator.response.ScheduleEmailRequest;
 import edu.miu.cs544.service.aggregator.response.ScheduleEmailResponse;
-import edu.miu.cs544.service.aggregator.response.TicketsAndEmailScheduleRequest;
+import edu.miu.cs544.service.aggregator.response.TicketResponseAndEmailScheduleRequest;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -65,8 +65,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public ScheduleEmailResponse finalizeReservation(String code) {
-		TicketsAndEmailScheduleRequest ticketsAndEmailRequest = restTemplate
-				.getForObject(lookupUrlFor(reservationServiceName) + "/reservations/" + code + "/tickets", TicketsAndEmailScheduleRequest.class);
+		TicketResponseAndEmailScheduleRequest ticketsAndEmailRequest = restTemplate
+				.getForObject(lookupUrlFor(reservationServiceName) + "/reservations/" + code + "/tickets", TicketResponseAndEmailScheduleRequest.class);
 		ScheduleEmailRequest request = buildEmailRequest(ticketsAndEmailRequest);
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -77,7 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
 		return response;
 	}
 	
-	private ScheduleEmailRequest buildEmailRequest(TicketsAndEmailScheduleRequest ticketsAndEmailScheduleRequest) {
+	private ScheduleEmailRequest buildEmailRequest(TicketResponseAndEmailScheduleRequest ticketsAndEmailScheduleRequest) {
 		List<ReservationDetailResponse> details = ticketsAndEmailScheduleRequest
 					.getTickets().stream()
 					.map(t -> t.getReservationDetail())
