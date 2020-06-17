@@ -3,17 +3,16 @@ package edu.miu.cs544.service;
 import java.util.List;
 
 import edu.miu.cs544.service.response.ReservationResponse;
-import edu.miu.cs544.service.response.TicketResponse;
-import edu.miu.cs544.service.response.TicketsAndEmailScheduleRequest;
+import edu.miu.cs544.service.response.TicketResponseAndEmailScheduleRequest;
 
 public interface ReservationService {
 	ReservationResponse getByCode(String code);
 	ReservationResponse cancelReservation(String code);
-  List<ReservationResponse> getAll();
+	List<ReservationResponse> getAll();
 	List<ReservationResponse> getAllByPassengerId(Integer id);
 	List<ReservationResponse> getAllByUserEmailAndPassengerId(String userEmail, Integer passengerId);
 	List<ReservationResponse> getAllByUserEmail(String userEmail);
 	ReservationResponse makeReservation(Integer passengerId, List<Integer> flights);
 	List<Integer> getAllFlightsByReservationCode(String code);
-  TicketsAndEmailScheduleRequest finalizeReservation(String code);
+	TicketResponseAndEmailScheduleRequest finalizeReservation(String code);
 }

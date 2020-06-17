@@ -2,6 +2,7 @@ package edu.miu.cs544.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import edu.miu.cs544.util.Constant.ReservationStatus;
 public class TicketServiceImpl implements TicketService {
 	
 	@Autowired
-	TicketRepository ticketRepository;
+	private TicketRepository ticketRepository;
 
 	@Autowired
 	private ReservationRepository reservationRepository;
@@ -41,25 +42,19 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public List<TicketResponse> purchaseTickets(String code, Integer passengerId) {
-		Reservation reservation = reservationRepository.findByCode(code);
-		if(reservation == null) {
-			throw new RuntimeException();
-		}
-		ReservationStatus status = reservation.getReservationStatus();
-		if(status == ReservationStatus.CANCELLED) {
-			throw new RuntimeException();
-		}
-		if(status == ReservationStatus.CONFIRMED) {
-			throw new RuntimeException();
-		}
+		Reservation reservation = reservationRepository.findByCode(code).get();
 		
+		ReservationStatus status = Optional.ofNullable(reservation.getReservationStatus())
+				.orElseThrow(() -> new IllegalArgumentException("Invalid status found"));
+		if(status == ReservationStatus.CANCELLED) throw new RuntimeException();
+		if(status == ReservationStatus.CONFIRMED) throw new RuntimeException();
+				
 		List<Ticket> tickets = reservation.getReservationDetails().stream()
 								.map(detail -> new Ticket(makeTicketNumber(), detail))
 								.collect(Collectors.toList());
-		
+	
 		reservation.setReservationStatus(ReservationStatus.CONFIRMED);
-		
-		//save
+
 		ticketRepository.saveAll(tickets);
 		reservationRepository.save(reservation);
 		

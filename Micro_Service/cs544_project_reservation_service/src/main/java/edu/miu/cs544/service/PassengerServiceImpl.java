@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.miu.cs544.domain.Address;
 import edu.miu.cs544.domain.Passenger;
 import edu.miu.cs544.repository.PassengerRepository;
 import edu.miu.cs544.service.request.PassengerRequest;
@@ -23,7 +22,8 @@ public class PassengerServiceImpl implements PassengerService {
 	
 	@Override
 	public PassengerResponse getById(Integer id) {
-		return new PassengerResponse(passengerRepository.findById(id).get());
+		Passenger passenger = passengerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+		return new PassengerResponse(passenger);
 	}
 	
 	@Override
@@ -53,11 +53,8 @@ public class PassengerServiceImpl implements PassengerService {
 		Passenger passenger;
 		try {
 			passenger = passengerRepository.findById(id).get();
-			passenger.setFirstName(passengerRequest.getFirstName());
-			passenger.setLastName(passengerRequest.getLastName());
-			passenger.setDateOfBirth(passengerRequest.getDateOfBirth());
-			passenger.setEmail(passengerRequest.getEmail());
-			passenger.setAddress(new Address(passengerRequest.getAddress()));
+			passenger = new Passenger(passengerRequest);
+			passenger.setId(id);
 			passengerRepository.save(passenger);
 		} catch (NoSuchElementException ex) {
 			passenger = passengerRepository.save(new Passenger(passengerRequest));

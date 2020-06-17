@@ -42,8 +42,5 @@ public class ReservationDetailResponse {
 	}
 	public void setFlightNumber(Integer flightNumber) {
 		this.flightNumber = flightNumber;
-	}
-	
-	
-	
+	}	
 }
